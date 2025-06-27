@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Free Fire Top-Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 20px;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(15px);
+      border-radius: 16px;
+      padding: 25px;
+      width: 100%;
+      max-width: 450px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    }
+
+    h1, h2 {
+      color: #fff;
+      text-align: center;
+    }
+
+    .package-button {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid #fff;
+      color: #fff;
+      padding: 12px;
+      border-radius: 12px;
+      margin: 8px 0;
+      font-size: 15px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    .package-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .package-button.selected {
+      background-color: #4caf50;
+      border-color: #4caf50;
+      color: #fff;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin: 12px 0;
+      font-size: 15px;
+      border: none;
+      border-radius: 10px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    input::placeholder {
+      color: #ddd;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 15px;
+      background-color: #00c853;
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+
+    button:hover {
+      background-color: #00b347;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>💎 Free Fire Top-Up</h1>
+
+    <h2>Diamond Packages</h2>
+    <div id="packageContainer">
+      <div class="package-button" data-diamonds="30" data-price="40">💎 30 Diamonds — Rs 40 💸</div>
+      <div class="package-button" data-diamonds="50" data-price="70">💎 50 Diamonds — Rs 70 💸</div>
+      <div class="package-button" data-diamonds="115" data-price="120">💎 115 Diamonds — Rs 120 💸</div>
+      <div class="package-button" data-diamonds="240" data-price="240">💎 240 Diamonds — Rs 240 💸</div>
+      <div class="package-button" data-diamonds="355" data-price="355">💎 355 Diamonds — Rs 355 💸</div>
+      <div class="package-button" data-diamonds="440" data-price="430">💎 440 Diamonds — Rs 430 💸</div>
+      <div class="package-button" data-diamonds="610" data-price="500">💎 610 Diamonds — Rs 500 💸</div>
+      <div class="package-button" data-diamonds="725" data-price="600">💎 725 Diamonds — Rs 600 💸</div>
+      <div class="package-button" data-diamonds="840" data-price="700">💎 840 Diamonds — Rs 700 💸</div>
+      <div class="package-button" data-diamonds="965" data-price="800">💎 965 Diamonds — Rs 800 💸</div>
+      <div class="package-button" data-diamonds="1090" data-price="1000">💎 1090 Diamonds — Rs 1000 💸</div>
+      <div class="package-button" data-diamonds="1240" data-price="1100">💎 1240 Diamonds — Rs 1100 💸</div>
+      <div class="package-button" data-diamonds="2530" data-price="2300">💎 2530 Diamonds — Rs 2,300 💸</div>
+      <div class="package-button" data-diamonds="5060" data-price="4500">💎 5060 Diamonds — Rs 4,500 💸</div>
+
+      <h2>Memberships</h2>
+      <div class="package-button" data-diamonds="Monthly Membership" data-price="1200">🎫 Monthly Membership — Rs 1,200 💸</div>
+      <div class="package-button" data-diamonds="Weekly Membership" data-price="220">🎫 Weekly Membership — Rs 220 💸</div>
+      <div class="package-button" data-diamonds="Weekly Lite" data-price="90">🎫 Weekly Lite — Rs 90 💸</div>
+      <div class="package-button" data-diamonds="Level-Up Pass (All Combo)" data-price="520">🎫 Level-Up Pass (All Combo) — Rs 520 💸</div>
+    </div>
+
+    <input type="text" id="uid" placeholder="Enter Free Fire UID">
+    <input type="text" id="username" placeholder="Enter Username">
+
+    <button onclick="goToWhatsApp()">Continue</button>
+  </div>
+
+  <script>
+    let selectedDiamonds = "";
+    let selectedPrice = "";
+
+    const packageButtons = document.querySelectorAll('.package-button');
+
+    packageButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        packageButtons.forEach(btn => btn.classList.remove('selected'));
+        button.classList.add('selected');
+        selectedDiamonds = button.getAttribute('data-diamonds');
+        selectedPrice = button.getAttribute('data-price');
+      });
+    });
+
+    function goToWhatsApp() {
+      const uid = document.getElementById("uid").value.trim();
+      const username = document.getElementById("username").value.trim();
+
+      if (!selectedDiamonds || !selectedPrice) {
+        alert("Please select a package");
+        return;
+      }
+
+      if (!uid || !username) {
+        alert("Please enter UID and Username");
+        return;
+      }
+
+      // Replace wa.me link with WhatsApp Channel (no message support)
+      window.location.href = "https://whatsapp.com/channel/0029VbAoKUrHwXbGEDYkhK0k";
+    }
+  </script>
+
+</body>
+</html>
